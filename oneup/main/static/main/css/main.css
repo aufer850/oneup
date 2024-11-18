@@ -1,0 +1,45 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    background: url(../img/фон.png) no-repeat center;
+    background-size: cover;
+    height: 100vh;
+}
+
+aside{
+    float:left;
+    background: #60068a75;
+    width:20%;
+    padding:2%;
+    height: 100%;
+    color:#fff;
+    border-right:5px solid #161515;
+}
+
+aside img{
+    float:center;
+    width:300px;
+}
+
+
+aside ul{
+    list-style:none
+}
+
+aside ul li{
+    color: #fff;
+    display:block;
+    margin-top:20px;
+    /* Для плавності */
+    transition: transform .6s ease;
+}
+
+aside ul li:hover, aside ul a:hover{
+    color:#0f0e0e;
+    text-decoration: none;
+    transform:scale(1.05) ;
+}
