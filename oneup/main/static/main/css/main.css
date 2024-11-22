@@ -1,45 +1,89 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     background: url(../img/фон.png) no-repeat center;
     background-size: cover;
     height: 100vh;
+    display: flex;
 }
 
-aside{
-    float:left;
+aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центруємо контент по горизонталі */
+    justify-content: flex-start; /* Вирівнюємо елементи на початку */
     background: #60068a75;
-    width:20%;
-    padding:2%;
+    width: 28%; /* Адаптивна ширина */
+    max-width: 250px; /* Максимальна ширина */
+    min-width: 150px; /* Мінімальна ширина */
     height: 100%;
-    color:#fff;
-    border-right:5px solid #161515;
-}
-
-aside img{
-    float:center;
-    width:300px;
-}
-
-
-aside ul{
-    list-style:none
-}
-
-aside ul li{
     color: #fff;
-    display:block;
-    margin-top:20px;
-    /* Для плавності */
-    transition: transform .6s ease;
+    border-right: 5px solid #161515;
 }
 
-aside ul li:hover, aside ul a:hover{
-    color:#0f0e0e;
+aside img {
+    width: 160%; /* Адаптивна ширина логотипа */
+    max-width: 270px;
+    margin-bottom: -3.5rem; /* Відступ під логотипом */
+    margin-top: -25px;
+    float: center;
+}
+
+aside ul a {
     text-decoration: none;
-    transform:scale(1.05) ;
+    display: block; /* Гарантуємо, що посилання займає всю ширину */
+    border-radius: 25px; /* Округлення посилання */
+}
+
+
+aside ul {
+    list-style: none;
+    width: 100%; /* Робимо список вкладок займати всю ширину панелі */
+    display: flex;
+    flex-direction: column;
+    align-items: left; 
+    gap: 1.2rem; /* Відстань між вкладками */
+    padding-left: 0;
+}
+
+aside ul li {
+    color: #fff;
+    font-size: 1.4rem; /* Розмір тексту */
+    width: calc(100% - 3rem); /* Робимо ширину списку адаптивною */
+    margin: 0 auto; /* Центруємо елемент всередині панелі */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border : 2px, solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+}
+    /* Іконка */
+
+.toggle-icon {
+    font-size: 5rem; 
+    color: #fff; 
+    cursor: pointer; 
+    /* margin: 1rem 0;  */
+    float: center;
+    transition: transform 0.3s ease; 
+    margin-bottom: 20px;
+}
+
+.toggle-icon:hover {
+    transform: scale(1.2); 
+}
+.list-elem a {
+    color: #fff;
+    max-width: 200px;
+    max-height: 45px;
+    padding: 0.5rem 1rem;
+}
+.list-elem a:hover {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    color: #0f0e0e;
+    transform: scale(1.1); /* Легке збільшення при наведенні */
+    background-color: rgba(255, 255, 255, 1);/* Білий фон при наведенні */
+    overflow: hidden;
 }

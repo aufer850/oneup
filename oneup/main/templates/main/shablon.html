@@ -1,5 +1,6 @@
 <!-- Файл для шаблону сайту -->
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,13 +16,17 @@
     <!-- Бічна панель -->
     <aside>
         <img src="{% static 'main/img/logo.svg' %}" alt="Лого">
+        <div class="toggle-icon">
+            <i class="fa-solid fa-bars"></i> 
+            
+        </div>
         <!-- ul>a*5 -->
-        <ul>
-            <a href="{% url 'main' %}"><li><i class="bi bi-house-fill"></i> Головна</li></a>
-            <a href="{% url 'review' %}"><li><i class="fa-solid fa-magnifying-glass-chart"></i> Огляди</li></a>
-            <a href="{% url 'selection' %}"><li><i class="fa-solid fa-scroll"></i> Підбірки</li></a>
-            <a href="{% url 'article' %}"><li><i class="fa-solid fa-newspaper"></i> Статі</li></a>
-            <a href="{% url 'about' %}"><li><i class="bi bi-person-vcard-fill"></i> Про нас</li></a>
+        <ul class="nav-list">
+            <li class="list-elem"><a href="{% url 'main' %}"><i class="bi bi-house-fill"></i> Головна</a></li>
+            <li class="list-elem"><a href="{% url 'review' %}"><i class="fa-solid fa-magnifying-glass-chart"></i> Огляди</a></li>
+            <li class="list-elem"><a href="{% url 'selection' %}"><i class="fa-solid fa-scroll"></i> Підбірки</a></li>
+            <li class="list-elem"><a href="{% url 'article' %}"><i class="fa-solid fa-newspaper"></i> Статі</a></li>
+            <li class="list-elem"><a href="{% url 'about' %}"><i class="bi bi-person-vcard-fill"></i> Про нас</a></li>
         </ul>
     </aside>
     <!-- Головна частина -->
