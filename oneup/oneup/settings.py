@@ -159,6 +159,8 @@ customColorPalette = [
             'label': 'Blue'
         },
     ]
+#CKEDITOR_5_CUSTOM_CSS = "main/static/main/css/main.css" # optional
+#CKEDITOR_5_FILE_STORAGE = "path_to_storage.CustomStorage" # optional
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': ['heading', '|', 'bold', 'italic', 'link',

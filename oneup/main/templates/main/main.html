@@ -2,6 +2,34 @@
 
 {% block title %}OneUp{% endblock %}
 
-{% block content %}
+{% block header %}
 <h1>Головна сторінка</h1>
+{% endblock %}
+{% block content %}
+    <div class = "allarticles">
+    {% if news %}
+        {% for new in news %}
+            <div class="articleview">
+                <h2>{{ new.title }}</h2>
+                <img class="image" src={{ new.previewimage.url }}>
+                <h2>Дата: {{ new.date }}</h2>
+                <h2>Переглядів: {{ new.getviews }}</h2>
+                <h2>Коментарів: {{ new.getcommentsamount }}</h2>
+                <form method="post" action="{% url 'like_article' new.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Лайк</button>
+                </form>
+                <h2>Рейтинг: {{ new.getrating }}</h2>
+                <!--рейтинг = лайки - дизлайки. в майбутньому залишиться тільки число-->
+                <form method="post" action="{% url 'dislike_article' new.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Дизлайк</button>
+                </form>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1>Сьогодні без новин!</h1>
+    {% endif %}
+    </div>
 {% endblock %}
