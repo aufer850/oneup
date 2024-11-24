@@ -1,6 +1,10 @@
+from http.cookiejar import request_path
+from idlelib.history import History
+
 from django.shortcuts import render
 from news.models import Articles
 from django.shortcuts import get_object_or_404, redirect
+from main.forms import commentform
 # Create your views here.
 from django.shortcuts import render
 
@@ -19,6 +23,26 @@ def selection(request):
 
 def article(request):
     return render(request,'main/article.html')
+
+def articlewindow(request, article_id):
+    newcomm = commentform
+    newcomm.articlekey = article_id
+    if request == 'POST':
+        newcomm = commentform(request.POST)
+        newcomm.id_articlekey = article_id
+    news = Articles.objects.order_by('date')
+    new = Articles.objects.get(pk = article_id)
+    comments = new.comments.all()
+    return render(request,'main/articlewindow.html', {'id':article_id,'news':news,'new': new,'commentform':newcomm,'comments':comments })
+
+def comment(request, article_id):
+    if request.method == 'POST':
+        newcomm = commentform(request.POST, initial = {'articlekey':article_id})
+        print(newcomm)
+        if newcomm.is_valid():
+            newcomm.save()
+
+    return redirect('/' + str(article_id))
 
 def like_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
