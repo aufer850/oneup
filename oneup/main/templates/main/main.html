@@ -15,14 +15,16 @@
                 <h2>Дата: {{ new.date }}</h2>
                 <h2>Переглядів: {{ new.getviews }}</h2>
                 <h2>Коментарів: {{ new.getcommentsamount }}</h2>
-                <form method="post" action="{% url 'like_article' new.id %}">
+                <form method="post" action="{% url 'like_article' new.id %}?frommain = True">
                     {% csrf_token %}
+                    <input type="hidden" name="frommain" value="True"> <!--ось це не чіпай, це костиль 😎-->
                     <button type="submit">Лайк</button>
                 </form>
                 <h2>Рейтинг: {{ new.getrating }}</h2>
                 <!--рейтинг = лайки - дизлайки. в майбутньому залишиться тільки число-->
                 <form method="post" action="{% url 'dislike_article' new.id %}">
                     {% csrf_token %}
+                    <input type="hidden" name="frommain" value="True"> <!--ось це не чіпай, це костиль 😎-->
                     <button type="submit">Дизлайк</button>
                 </form>
                 <form method="post" action="{% url 'articlewindow' new.id %}">

@@ -37,10 +37,17 @@ def articlewindow(request, article_id):
 
 def comment(request, article_id):
     if request.method == 'POST':
-        newcomm = commentform(request.POST, initial = {'articlekey':article_id})
+        article = get_object_or_404(Articles, id=article_id)
+        newcomm = commentform(request.POST)
         print(newcomm)
         if newcomm.is_valid():
-            newcomm.save()
+            print("CHTO BLYAT NAHUI")
+            new_comment = newcomm.save(commit=False)
+            new_comment.articlekey = article
+            new_comment.save()
+
+
+
 
     return redirect('/' + str(article_id))
 
@@ -48,13 +55,22 @@ def like_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
     user_ip = get_client_ip(request)
     article.addlike(user_ip)
-    return redirect('main')
+    frommain = request.POST.get('frommain') == 'True'
+    if frommain == True:
+        return redirect('main')
+    else:
+        return redirect('/' + str(article_id))
 
 def dislike_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
     user_ip = get_client_ip(request)
     article.adddislike(user_ip)
     return redirect('main')
+    frommain = request.POST.get('frommain') == 'True'
+    if frommain == True:
+        return redirect('main')
+    else:
+        return redirect('/' + str(article_id))
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
