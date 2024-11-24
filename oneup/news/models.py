@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.conf.urls.static import static
 from django.db import models
 from django.utils.functional import empty
@@ -93,4 +95,4 @@ class Comments(models.Model):
         verbose_name = 'Коментар'
         verbose_name_plural = 'Коментарі'
     def __str__(self):
-        return f'{self.name} -> {self.articlekey.name}'
+        return f'{self.name} -> {self.articlekey.title}'

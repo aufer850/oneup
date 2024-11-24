@@ -25,7 +25,10 @@
                     {% csrf_token %}
                     <button type="submit">Дизлайк</button>
                 </form>
-
+                <form method="post" action="{% url 'articlewindow' new.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Перейти</button>
+                </form>
             </div>
         {% endfor %}
     {% else %}
