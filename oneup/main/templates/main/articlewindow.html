@@ -1,0 +1,48 @@
+{% extends 'main/shablon.html' %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <div class = "allarticles">
+    {% if news and id and new %}
+        <h1> {{ new.title }}</h1>
+        <h1>{{ new.articletext | safe}}</h1>
+        <form method="post" action="{% url 'like_article' new.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Лайк</button>
+        </form>
+        <h1> Рейтинг: {{ new.getrating }}</h1>
+        <form method="post" action="{% url 'dislike_article' new.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Дизлайк</button>
+                </form>
+        {% if new.getcommentsamount == 0 %}
+        <h1>Поки що коментарів немає...</h1>
+        {% else %}
+            {% for com in comments %}
+                <h1> {{ com.name }}</h1>
+                <h1> {{ com.email }}</h1>
+                <h1> {{ com.commenttext }}</h1>
+                <h1></h1>
+            {% endfor %}
+        {% endif %}
+        <h1>Додати комментар</h1>
+        <form method="post", action="{% url 'comment' new.id %}">
+        {% csrf_token %}
+        {{ commentform.name }} {{ commentform.email }} </br>
+            {{commentform.commenttext}}
+        <button class = 'btn btn-success' type="submit"> Додати коментар
+        </button>
+        </form>
+
+    {% else %}
+        <h1>А де?!</h1>
+    {% endif %}
+        </div>
+{% endblock %}
+</body>
+</html>
