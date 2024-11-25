@@ -13,16 +13,20 @@ def index(request):
     return render(request, 'main/main.html', {'news':news})
 
 def about(request):
+
     return render(request,'main/about.html')
 
 def review(request):
-    return render(request,'main/review.html')
+    news = Articles.objects.filter(articletype='огляд').order_by('date')
+    return render(request,'main/review.html', {'news': news})
 
 def selection(request):
-    return render(request,'main/selection.html')
+    news = Articles.objects.filter(articletype='підбірка').order_by('date')
+    return render(request,'main/selection.html', {'news': news})
 
 def article(request):
-    return render(request,'main/article.html')
+    news = Articles.objects.filter(articletype = 'стаття').order_by('date')
+    return render(request,'main/article.html', {'news':news})
 
 def articlewindow(request, article_id):
     newcomm = commentform
@@ -55,9 +59,9 @@ def like_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
     user_ip = get_client_ip(request)
     article.addlike(user_ip)
-    frommain = request.POST.get('frommain') == 'True'
-    if frommain == True:
-        return redirect('main')
+    frommain = request.POST.get('redirectto')
+    if frommain:
+        return redirect(frommain)
     else:
         return redirect('/' + str(article_id))
 
@@ -66,9 +70,9 @@ def dislike_article(request, article_id):
     user_ip = get_client_ip(request)
     article.adddislike(user_ip)
     return redirect('main')
-    frommain = request.POST.get('frommain') == 'True'
-    if frommain == True:
-        return redirect('main')
+    frommain = request.POST.get('redirectto')
+    if frommain:
+        return redirect(frommain)
     else:
         return redirect('/' + str(article_id))
 
