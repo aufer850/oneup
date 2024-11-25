@@ -1,48 +1,54 @@
 {% extends 'main/shablon.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/main/css/reviews.css' %}?v=1">
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Article Window</title>
 </head>
 <body>
 {% block content %}
-    <div class = "allarticles">
+    <div class="allarticles">
     {% if news and id and new %}
-        <h1> {{ new.title }}</h1>
-        <h1>{{ new.articletext | safe}}</h1>
+        <h1 class="title"> {{ new.title }}</h1>
+        <!-- <style>
+            h1.title {
+                margin-left: 50px;
+                text-align: center;
+                color: #fff;
+            }
+            </style> -->
+        <h1>{{ new.articletext | safe }}</h1>
         <form method="post" action="{% url 'like_article' new.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Лайк</button>
+            {% csrf_token %}
+            <button type="submit">Лайк</button>
         </form>
-        <h1> Рейтинг: {{ new.getrating }}</h1>
+        <h1>Рейтинг: {{ new.getrating }}</h1>
         <form method="post" action="{% url 'dislike_article' new.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Дизлайк</button>
-                </form>
+            {% csrf_token %}
+            <button type="submit">Дизлайк</button>
+        </form>
         {% if new.getcommentsamount == 0 %}
-        <h1>Поки що коментарів немає...</h1>
+            <h1>Поки що коментарів немає...</h1>
         {% else %}
             {% for com in comments %}
-                <h1> {{ com.name }}</h1>
-                <h1> {{ com.email }}</h1>
-                <h1> {{ com.commenttext }}</h1>
-                <h1></h1>
+                <h1>{{ com.name }}</h1>
+                <h1>{{ com.email }}</h1>
+                <h1>{{ com.commenttext }}</h1>
             {% endfor %}
         {% endif %}
-        <h1>Додати комментар</h1>
-        <form method="post", action="{% url 'comment' new.id %}">
-        {% csrf_token %}
-        {{ commentform.name }} {{ commentform.email }} </br>
-            {{commentform.commenttext}}
-        <button class = 'btn btn-success' type="submit"> Додати коментар
-        </button>
+        <h1>Додати коментар</h1>
+        <form method="post" action="{% url 'comment' new.id %}">
+            {% csrf_token %}
+            {{ commentform.name }} {{ commentform.email }} </br>
+            {{ commentform.commenttext }}
+            <button class="btn btn-success" type="submit">Додати коментар</button>
         </form>
-
     {% else %}
         <h1>А де?!</h1>
     {% endif %}
-        </div>
+    </div>
 {% endblock %}
 </body>
 </html>

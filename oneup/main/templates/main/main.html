@@ -15,21 +15,27 @@
                 <h2>Дата: {{ new.date }}</h2>
                 <h2>Переглядів: {{ new.getviews }}</h2>
                 <h2>Коментарів: {{ new.getcommentsamount }}</h2>
-                <form method="post" action="{% url 'like_article' new.id %}?frommain = True">
-                    {% csrf_token %}
-                    <input type="hidden" name="frommain" value="True"> <!--ось це не чіпай, це костиль 😎-->
-                    <button type="submit">Лайк</button>
-                </form>
-                <h2>Рейтинг: {{ new.getrating }}</h2>
-                <!--рейтинг = лайки - дизлайки. в майбутньому залишиться тільки число-->
-                <form method="post" action="{% url 'dislike_article' new.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="frommain" value="True"> <!--ось це не чіпай, це костиль 😎-->
-                    <button type="submit">Дизлайк</button>
-                </form>
+                <div class="like-dislike-buttons">
+                    <form method="post" action="{% url 'like_article' new.id %}?frommain = True">
+                        {% csrf_token %}
+                        <input type="hidden" name="frommain" value="True"> <!--ось це не чіпай, це костиль 😎-->
+                        <button type="submit" class="btn btn-like">
+                            <i class="bi bi-hand-thumbs-up-fill"></i> Лайк
+                        </button>
+                    </form>
+                    <!--рейтинг = лайки - дизлайки. в майбутньому залишиться тільки число-->
+                    <form method="post" action="{% url 'dislike_article' new.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="frommain" value="True"> <!--ось це не чіпай, це костиль 😎-->
+                        <button type="submit" class="btn btn-dislike">
+                            <i class="bi bi-hand-thumbs-down-fill"></i> Дизлайк
+                        </button>
+                    </form>
+                </div>
+                <h2 class="rating">Рейтинг: {{ new.getrating }}</h2>
                 <form method="post" action="{% url 'articlewindow' new.id %}">
                     {% csrf_token %}
-                    <button type="submit">Перейти</button>
+                    <button type="submit" class="link">Перейти</button>
                 </form>
             </div>
         {% endfor %}
