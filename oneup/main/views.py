@@ -13,7 +13,6 @@ def index(request):
     return render(request, 'main/main.html', {'news':news})
 
 def about(request):
-
     return render(request,'main/about.html')
 
 def review(request):
@@ -49,10 +48,6 @@ def comment(request, article_id):
             new_comment = newcomm.save(commit=False)
             new_comment.articlekey = article
             new_comment.save()
-
-
-
-
     return redirect('/' + str(article_id))
 
 def like_article(request, article_id):
@@ -69,7 +64,6 @@ def dislike_article(request, article_id):
     article = get_object_or_404(Articles, id=article_id)
     user_ip = get_client_ip(request)
     article.adddislike(user_ip)
-    return redirect('main')
     frommain = request.POST.get('redirectto')
     if frommain:
         return redirect(frommain)
