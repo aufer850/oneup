@@ -1,12 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 {% extends 'main/shablon.html' %}
-
 {% block title %}OneUp{% endblock %}
 
 {% block header %}
-<h1>Головна сторінка</h1>
+<h1>Результати пошуку по "{{ query }}"</h1>
 {% endblock %}
 {% block content %}
     <div class = "allarticles">
+        <h1>Результати пошуку по "{{ query }}"</h1>
     {% if news %}
         {% for new in news %}
             <div class="articleview">
@@ -40,7 +46,9 @@
             </div>
         {% endfor %}
     {% else %}
-        <h1>Сьогодні без новин!</h1>
+        <h1>Нічого не знайдено!</h1>
     {% endif %}
     </div>
 {% endblock %}
+
+</html>

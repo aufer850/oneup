@@ -73,6 +73,11 @@ def dislike_article(request, article_id):
     else:
         return redirect('/' + str(article_id))
 
+def search(request):
+    query = request.GET.get('query', '').strip()  # Получаем запрос из формы
+    results = Articles.objects.filter(title__icontains=query) if query else []  # Фильтруем статьи
+    return render(request, 'main/searchresults.html', {'news': results, 'query': query})
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
