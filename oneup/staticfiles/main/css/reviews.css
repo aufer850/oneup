@@ -3,3 +3,9 @@ h1 .title{
     text-align: center;
     color: #fff;
 }
+
+h1 .text{
+    margin-left: 50px;
+    text-align: center;
+    color: #fff;
+}
