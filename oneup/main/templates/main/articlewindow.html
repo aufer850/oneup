@@ -1,6 +1,6 @@
 {% extends 'main/shablon.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static '/main/css/reviews.css' %}?v=1">
+<link rel="stylesheet" href="{% static 'main/css/reviews.css' %}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +8,7 @@
     <title>Article Window</title>
 </head>
 <body>
+<h1>{{ STATIC_URL }}</h1>
 {% block content %}
     <div class="allarticles">
     {% if news and id and new %}
