@@ -71,8 +71,9 @@ class Articles(models.Model):
     def view(self, user_ip): # перегляд
         reaction = self.interactions.filter(user=user_ip).first()
         if not  reaction:
-            self.interactions.create(user=user_ip, is_like=None)
-        reaction.save()
+            reaction = self.interactions.create(user=user_ip, is_like=None)
+            reaction.save()
+
 
 class ArticleReaction(models.Model): # лайк, дизлайк та перегляд
     user = models.GenericIPAddressField('IP - адреса')

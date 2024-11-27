@@ -30,11 +30,14 @@ def article(request):
 def articlewindow(request, article_id):
     newcomm = commentform
     newcomm.articlekey = article_id
+    user_ip = get_client_ip(request)
     if request == 'POST':
         newcomm = commentform(request.POST)
         newcomm.id_articlekey = article_id
     news = Articles.objects.order_by('date')
     new = Articles.objects.get(pk = article_id)
+    if user_ip:
+        new.view(user_ip)
     comments = new.comments.all()
     return render(request,'main/articlewindow.html', {'id':article_id,'news':news,'new': new,'commentform':newcomm,'comments':comments })
 
@@ -69,6 +72,11 @@ def dislike_article(request, article_id):
         return redirect(frommain)
     else:
         return redirect('/' + str(article_id))
+
+def search(request):
+    query = request.GET.get('query', '').strip()  # Получаем запрос из формы
+    results = Articles.objects.filter(title__icontains=query) if query else []  # Фильтруем статьи
+    return render(request, 'main/searchresults.html', {'news': results, 'query': query})
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
