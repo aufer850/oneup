@@ -14,17 +14,15 @@
     <!-- Верхня панель -->
     <header>
         <div class="logo-container">
-            <img src="{% static 'main/images/logo.svg' %}" alt="Лого">
+            <img src="{% static 'main/img/logo.svg' %}" alt="Лого">
         </div>
-        <form method="GET" action="{% url 'search' %}">
-            {% csrf_token %}
         <div class="search-container">
-            <input type="text" name = 'query' placeholder="Пошук по сайту">
-            <button type = 'submit'>
+            <input type="text" placeholder="Пошук по сайту">
+            <button>
                 <i class="fa-solid fa-search"></i>
             </button>
+        
         </div>
-        </form>
         <div class="menu-icon">
             <button onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>

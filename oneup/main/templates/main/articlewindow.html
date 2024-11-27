@@ -1,6 +1,6 @@
 {% extends 'main/shablon.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'main/css/reviews.css' %}">
+<link rel="stylesheet" href="{% static '/main/css/reviews.css' %}?v=1">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,22 +24,14 @@
             {% csrf_token %}
             <button type="submit">Лайк</button>
         </form>
-        <h1> Лайки: {{ new.getlikes }} </h1>
-        <h1> Дизлайки: {{ new.getdislikes }} </h1>
+        <h1>Рейтинг: {{ new.getrating }}</h1>
         <form method="post" action="{% url 'dislike_article' new.id %}">
             {% csrf_token %}
             <button type="submit">Дизлайк</button>
         </form>
-        <form method="post" action="{% url 'comment' new.id %}">
-            {% csrf_token %}
-            {{ commentform.name }} {{ commentform.email }} </br>
-            {{ commentform.commenttext }}
-            <button class="btn btn-success" type="submit">Додати коментар</button>
-        </form>
         {% if new.getcommentsamount == 0 %}
             <h1>Поки що коментарів немає...</h1>
         {% else %}
-        <h2> Коментарів: {{ new.getcommentsamount }}</h2>
             {% for com in comments %}
                 <h1>{{ com.name }}</h1>
                 <h1>{{ com.email }}</h1>
@@ -47,7 +39,12 @@
             {% endfor %}
         {% endif %}
         <h1>Додати коментар</h1>
-
+        <form method="post" action="{% url 'comment' new.id %}">
+            {% csrf_token %}
+            {{ commentform.name }} {{ commentform.email }} </br>
+            {{ commentform.commenttext }}
+            <button class="btn btn-success" type="submit">Додати коментар</button>
+        </form>
     {% else %}
         <h1>А де?!</h1>
     {% endif %}
