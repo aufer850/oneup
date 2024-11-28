@@ -16,13 +16,12 @@
         <div class="logo-container">
             <img src="{% static 'main/img/logo.svg' %}" alt="Лого">
         </div>
-        <div class="search-container">
-            <input type="text" placeholder="Пошук по сайту">
-            <button>
-                <i class="fa-solid fa-search"></i>
+        <form  class="search-container" method = "GET" action="{% url 'searchresults' %}">
+            <input type="text" name="query" placeholder="Пошук по сайту">
+            <button type = "submit">
+                <i class="fa-solid fa-search" ></i>
             </button>
-        
-        </div>
+        </form >
         <div class="menu-icon">
             <button onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>
