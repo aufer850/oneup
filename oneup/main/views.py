@@ -49,7 +49,6 @@ def comment(request, article_id):
         newcomm = commentform(request.POST)
         print(newcomm)
         if newcomm.is_valid():
-            print("CHTO BLYAT NAHUI")
             new_comment = newcomm.save(commit=False)
             new_comment.articlekey = article
             new_comment.save()

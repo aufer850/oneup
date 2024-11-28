@@ -18,13 +18,13 @@
                 {% csrf_token %}
                 <button type="submit" class="b like">Лайк</button>
             </form>
-
+            <h1> Лайків: {{ new.getlikes }}</h1>
             <form method="post" action="{% url 'dislike_article' new.id %}">
                 {% csrf_token %}
                 <button type="submit" class="b dis">Дизлайк</button>
             </form>
+            <h1> Дизлайків: {{ new.getdislikes }}</h1>
         </div>
-        <h1>Рейтинг: {{ new.getrating }}</h1>
         {% if new.getcommentsamount == 0 %}
             <h1>Поки що коментарів немає...</h1>
         {% else %}
