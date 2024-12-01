@@ -13,7 +13,7 @@
                 <div class="like-dislike-buttons">
                     <form method="post" action="{% url 'like_article' new.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="redirectto" value="main"> <!--ось це не чіпай, це костиль 😎-->
+                        <input type="hidden" name="redirectto" value="searchresults"> <!--ось це не чіпай, це костиль 😎-->
                         <button type="submit" class="btn btn-like">
                             <i class="bi bi-hand-thumbs-up-fill"></i> Лайк
                         </button>
@@ -21,7 +21,7 @@
                     <h1> Лайків: {{ new.getlikes }}</h1>
                     <form method="post" action="{% url 'dislike_article' new.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="redirectto" value="main"> <!--ось це не чіпай, це костиль 😎-->
+                        <input type="hidden" name="redirectto" value="searchresults"> <!--ось це не чіпай, це костиль 😎-->
                         <button type="submit" class="btn btn-dislike">
                             <i class="bi bi-hand-thumbs-down-fill"></i> Дизлайк
                         </button>
