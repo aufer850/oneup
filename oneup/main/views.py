@@ -38,13 +38,17 @@ def articlewindow(request, article_id):
     comments = new.comments.all()
     return render(request,'main/articlewindow.html', {'id':article_id,'news':news,'new': new,'commentform':newcomm,'comments':comments })
 
+def search(request):
+    query = request.GET.get('query', '').strip()
+    results = Articles.objects.filter(title__icontains=query) if query else []
+    return render(request, 'main/searchresults.html', {'news': results, 'query': query})
+
 def comment(request, article_id):
     if request.method == 'POST':
         article = get_object_or_404(Articles, id=article_id)
         newcomm = commentform(request.POST)
         print(newcomm)
         if newcomm.is_valid():
-            print("CHTO BLYAT NAHUI")
             new_comment = newcomm.save(commit=False)
             new_comment.articlekey = article
             new_comment.save()

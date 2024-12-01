@@ -3,7 +3,6 @@
 {% block title %}Огляди{% endblock %}
 
 {% block content %}
-<h1>Огляди</h1>
 <div class = "allarticles">
     {% if news %}
         {% for new in news %}
@@ -16,21 +15,21 @@
                 <div class="like-dislike-buttons">
                     <form method="post" action="{% url 'like_article' new.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="redirectto" value="rewiew"> <!--ось це не чіпай, це костиль 😎-->
+                        <input type="hidden" name="redirectto" value="main"> <!--ось це не чіпай, це костиль 😎-->
                         <button type="submit" class="btn btn-like">
                             <i class="bi bi-hand-thumbs-up-fill"></i> Лайк
                         </button>
                     </form>
-                    <!--рейтинг = лайки - дизлайки. в майбутньому залишиться тільки число-->
+                    <h1> Лайків: {{ new.getlikes }}</h1>
                     <form method="post" action="{% url 'dislike_article' new.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="redirectto" value="rewiew"> <!--ось це не чіпай, це костиль 😎-->
+                        <input type="hidden" name="redirectto" value="main"> <!--ось це не чіпай, це костиль 😎-->
                         <button type="submit" class="btn btn-dislike">
                             <i class="bi bi-hand-thumbs-down-fill"></i> Дизлайк
                         </button>
                     </form>
+                    <h1> Дизлайків: {{ new.getdislikes }}</h1>
                 </div>
-                <h2 class="rating">Рейтинг: {{ new.getrating }}</h2>
                 <form method="post" action="{% url 'articlewindow' new.id %}">
                     {% csrf_token %}
                     <button type="submit" class="link">Перейти</button>

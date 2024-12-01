@@ -1,9 +1,7 @@
 {% extends 'main/shablon.html' %}
-
-{% block title %}Статті{% endblock %}
-
 {% block content %}
 <div class = "allarticles">
+    <h1>Результати пошуку по "{{ query }}"</h1>
     {% if news %}
         {% for new in news %}
             <div class="articleview">
@@ -15,7 +13,7 @@
                 <div class="like-dislike-buttons">
                     <form method="post" action="{% url 'like_article' new.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="redirectto" value="main"> <!--ось це не чіпай, це костиль 😎-->
+                        <input type="hidden" name="redirectto" value="searchresults"> <!--ось це не чіпай, це костиль 😎-->
                         <button type="submit" class="btn btn-like">
                             <i class="bi bi-hand-thumbs-up-fill"></i> Лайк
                         </button>
@@ -23,7 +21,7 @@
                     <h1> Лайків: {{ new.getlikes }}</h1>
                     <form method="post" action="{% url 'dislike_article' new.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="redirectto" value="main"> <!--ось це не чіпай, це костиль 😎-->
+                        <input type="hidden" name="redirectto" value="searchresults"> <!--ось це не чіпай, це костиль 😎-->
                         <button type="submit" class="btn btn-dislike">
                             <i class="bi bi-hand-thumbs-down-fill"></i> Дизлайк
                         </button>
@@ -37,7 +35,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <h1>Сьогодні без новин!</h1>
+        <h1>Нічого не знайдено!</h1>
     {% endif %}
     </div>
 {% endblock %}
